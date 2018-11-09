@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 
 import com.eduardosferreira.workshopsbmongo.exception.DomainRunTimeException;
 
-public abstract class People implements Serializable {
+public abstract class People implements Serializable, Comparable<People> {
 	
 	private static final long serialVersionUID = 1L;
 	private static Long instance = 0l;
@@ -84,6 +84,11 @@ public abstract class People implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public int compareTo(People o) {
+		return o.getId().trim().toUpperCase().compareToIgnoreCase(this.getId().trim().toUpperCase());
 	}
 	
 	

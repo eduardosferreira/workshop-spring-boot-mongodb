@@ -8,12 +8,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.eduardosferreira.workshopsbmongo.exception.DomainRunTimeException;
 
 @Document(collection="user")
-public class User implements Serializable, Comparable<User> {
+public class User implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	@Id
 	private String id;
 	private String name;
+	private String email;
 	
 	
 	public String getId() {
@@ -35,8 +36,6 @@ public class User implements Serializable, Comparable<User> {
 		this.name = name;
 	}
 
-	
-	private String email;
 	public String getEmail() {
 		return email;
 	}
@@ -47,7 +46,12 @@ public class User implements Serializable, Comparable<User> {
 		this.email = email;
 	}
 
+	private User() {
+		super();
+	}
+	
 	public User(String id, String name, String email) {
+		this();
 		this.setId(id);
 		this.setName(name);
 		this.setEmail(email);
@@ -55,7 +59,7 @@ public class User implements Serializable, Comparable<User> {
 	
 	@Override
 	public String toString() {
-		return "User [" + super.toString() + ", email=" + this.getEmail() + "]";
+		return "User [" + "id= " + this.getId() + ", name= " + this.getName() + ", email=" + this.getEmail() + "]";
 	}
 	
 	@Override
@@ -81,11 +85,6 @@ public class User implements Serializable, Comparable<User> {
 			return false;
 		return true;
 	}
-	@Override
-	public int compareTo(User o) {
-		return o.getId().trim().toUpperCase().compareToIgnoreCase(this.getId().trim().toUpperCase());
-	}
-	
 	
 
 }
