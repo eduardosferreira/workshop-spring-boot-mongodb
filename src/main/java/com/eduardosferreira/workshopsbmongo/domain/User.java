@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.eduardosferreira.workshopsbmongo.exception.DomainRunTimeException;
+import com.eduardosferreira.workshopsbmongo.domain.exception.DomainRunTimeException;
 
 @Document(collection="user")
 public class User implements Serializable {

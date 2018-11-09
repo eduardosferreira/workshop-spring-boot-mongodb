@@ -1,4 +1,4 @@
-package com.eduardosferreira.workshopsbmongo.exception;
+package com.eduardosferreira.workshopsbmongo.domain.exception;
 
 public class DomainRunTimeException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

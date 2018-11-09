@@ -1,10 +1,10 @@
-package com.eduardosferreira.workshopsbmongo.model;
+package com.eduardosferreira.workshopsbmongo.domain.model;
 
 import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
 
-import com.eduardosferreira.workshopsbmongo.exception.DomainRunTimeException;
+import com.eduardosferreira.workshopsbmongo.domain.exception.DomainRunTimeException;
 
 public abstract class People implements Serializable, Comparable<People> {
 	
