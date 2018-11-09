@@ -2,6 +2,8 @@ package com.eduardosferreira.workshopsbmongo.model;
 
 import java.io.Serializable;
 
+import org.springframework.data.annotation.Id;
+
 import com.eduardosferreira.workshopsbmongo.exception.DomainRunTimeException;
 
 public abstract class People implements Serializable {
@@ -15,6 +17,7 @@ public abstract class People implements Serializable {
 		People.instance = instance;
 	}
 
+	@Id
 	private String id;
 	private String name;
 	

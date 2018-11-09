@@ -2,33 +2,57 @@ package com.eduardosferreira.workshopsbmongo.domain;
 
 import java.io.Serializable;
 
-import com.eduardosferreira.workshopsbmongo.exception.DomainRunTimeException;
-import com.eduardosferreira.workshopsbmongo.model.People;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class User extends People implements Serializable, Comparable<User> {
+import com.eduardosferreira.workshopsbmongo.exception.DomainRunTimeException;
+
+@Document(collection="user")
+public class User implements Serializable, Comparable<User> {
 	
 	private static final long serialVersionUID = 1L;
-	private String email;
+	@Id
+	private String id;
+	private String name;
 	
+	
+	public String getId() {
+		return id;
+	}
+	protected void setId(String id) {
+		if (id == null || id.trim().equals("") || id.trim().equals("0")) 
+			throw new DomainRunTimeException("Invalid Argument! " + id);
+		
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	protected void setName(String name) {
+		if (name == null || name.trim().equals("")) 
+			throw new DomainRunTimeException("Invalid Argument! " + name);
+
+		this.name = name;
+	}
+
+	
+	private String email;
 	public String getEmail() {
 		return email;
 	}
 	private void setEmail(String email) {
+		if (email == null || email.trim().equals("")) 
+			throw new DomainRunTimeException("Invalid Argument! " + email);
+
 		this.email = email;
 	}
 
 	public User(String id, String name, String email) {
-		super(id,name);
+		this.setId(id);
+		this.setName(name);
 		this.setEmail(email);
 	}
 	
-	public User(String name, String email) {
-		super(name);
-		if (email == null || email.trim().equals("")) 
-			throw new DomainRunTimeException("Invalid Argument! " + email);
-			
-		this.setEmail(email);
-	}
 	@Override
 	public String toString() {
 		return "User [" + super.toString() + ", email=" + this.getEmail() + "]";
