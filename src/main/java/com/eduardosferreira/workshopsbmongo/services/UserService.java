@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eduardosferreira.workshopsbmongo.domain.User;
+import com.eduardosferreira.workshopsbmongo.dto.UserDTO;
 import com.eduardosferreira.workshopsbmongo.repository.UserRepository;
 import com.eduardosferreira.workshopsbmongo.services.exception.ObjectNotFoundRunTimeException;
 
@@ -17,7 +18,7 @@ public class UserService {
 	private UserRepository repositoryUser;
 	
 	
-	public List<User> findAll(){
+	public List<User> findAllUser(){
 		return repositoryUser.findAll();
 	}
 
@@ -25,5 +26,16 @@ public class UserService {
 		Optional<User> objUser = repositoryUser.findById(id);
 		return objUser.orElseThrow(() -> new ObjectNotFoundRunTimeException("Object Not Found!"));
 	}
-		
+	
+	public User insertUser(User user) {
+		return repositoryUser.insert(user);
+	}
+	
+	public User fromDTO(UserDTO objtDTO) {
+		return new User(objtDTO.getId(), objtDTO.getName(), objtDTO.getEmail());
+	}
+	public User fromDTO(String id, String name, String email) {
+		return new User(id,name,email);
+	}
+	
 }
